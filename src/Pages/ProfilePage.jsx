@@ -29,7 +29,7 @@ const ProfilePage = () => {
       // Generate QR code
       const token = localStorage.getItem('token');
       if (token) {
-        axios.get('http://localhost:9000/api/qr/generate', {
+        axios.get('https://zenpay-backend.vercel.app/api/qr/generate', {
           headers: {
             Authorization: `Bearer ${token}`
           }

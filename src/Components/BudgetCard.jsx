@@ -30,7 +30,7 @@ const spentPercent = budgetData.budget > 0
       if (!token) return;
 
       try {
-        const res = await axios.get('http://localhost:9000/api/budget/status', {
+        const res = await axios.get('https://zenpay-backend.vercel.app/api/budget/status', {
           headers: { Authorization: `Bearer ${token}` }
         });
         console.log(res)

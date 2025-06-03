@@ -20,7 +20,7 @@ const BudgetModule = ({ onBudgetUpdate }) => {
   const fetchBudgets = async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.get('http://localhost:9000/api/budget/allstatus', {
+      const res = await axios.get('https://zenpay-backend.vercel.app/api/budget/allstatus', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -47,7 +47,7 @@ const BudgetModule = ({ onBudgetUpdate }) => {
     try {
       if (editingBudget) {
         const res = await axios.put(
-          `http://localhost:9000/api/budget/update/${editingBudget._id}`,
+          `https://zenpay-backend.vercel.app/api/budget/update/${editingBudget._id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -55,7 +55,7 @@ const BudgetModule = ({ onBudgetUpdate }) => {
         setBudgets(updated);
       } else {
         const res = await axios.post(
-          'http://localhost:9000/api/budget/set',
+          'https://zenpay-backend.vercel.app/api/budget/set',
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -83,7 +83,7 @@ const BudgetModule = ({ onBudgetUpdate }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:9000/api/budget/delete/${id}`, {
+      await axios.delete(`https://zenpay-backend.vercel.app/api/budget/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBudgets(budgets.filter(b => b._id !== id));

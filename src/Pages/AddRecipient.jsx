@@ -37,7 +37,7 @@ const AddRecipient = () => {
       setLoading(true);
 
       await axios.post(
-        'http://localhost:9000/api/recipient/add',
+        'https://zenpay-backend.vercel.app/api/recipient/add',
         {
           name: alias,
           account_number: userId
@@ -50,7 +50,7 @@ const AddRecipient = () => {
       );
 
       await axios.post(
-        'http://localhost:9000/api/transaction/transfer',
+        'https://zenpay-backend.vercel.app/api/transaction/transfer',
         {
           amount,
           recipient_account_number: userId,

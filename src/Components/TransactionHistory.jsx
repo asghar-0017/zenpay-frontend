@@ -14,7 +14,7 @@ const TransactionHistory = () => {
     const fetchTransactions = async () => {
       const token = localStorage.getItem('token');
       try {
-        const res = await axios.get('http://localhost:9000/api/transaction/history', {
+        const res = await axios.get('https://zenpay-backend.vercel.app/api/transaction/history', {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(res)

@@ -15,7 +15,7 @@ function BalanceCard() {
     if (!token) return;
 
     try {
-      const res = await axios.get("http://localhost:9000/api/auth/profile", {
+      const res = await axios.get("https://zenpay-backend.vercel.app/api/auth/profile", {
         headers: {
           Authorization: `Bearer ${token}`
         }

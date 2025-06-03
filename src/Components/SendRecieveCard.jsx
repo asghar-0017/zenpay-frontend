@@ -138,7 +138,7 @@ const SendModal = ({ show, onClose, setBalance }) => {
     const fetchRecipients = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:9000/api/recipient/list', {
+        const res = await axios.get('https://zenpay-backend.vercel.app/api/recipient/list', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -315,7 +315,7 @@ useEffect(() => {
     if (!token) return;
 
     try {
-      const res = await axios.get("http://localhost:9000/api/auth/profile", {
+      const res = await axios.get("https://zenpay-backend.vercel.app/api/auth/profile", {
         headers: { Authorization: `Bearer ${token}` }
       });
       const user = res.data.user;
@@ -339,14 +339,14 @@ useEffect(() => {
     setDepositing(true);
 
     // Get bank_account_id from profile
-    const profileRes = await axios.get("http://localhost:9000/api/auth/profile", {
+    const profileRes = await axios.get("https://zenpay-backend.vercel.app/api/auth/profile", {
       headers: { Authorization: `Bearer ${token}` }
     });
 
     const bank_account_id = profileRes.data.user.bank_account?.bank_account_id;
 
     const response = await axios.post(
-      "http://localhost:9000/api/transaction/withdraw",
+      "https://zenpay-backend.vercel.app/api/transaction/withdraw",
       { amount: Number(amount), bank_account_id },
       { headers: { Authorization: `Bearer ${token}` } }
     );

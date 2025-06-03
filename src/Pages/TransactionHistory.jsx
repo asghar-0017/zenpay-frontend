@@ -47,7 +47,7 @@ const TransactionHistory = () => {
       if (!token) return;
 
       try {
-        const response = await axios.get('http://localhost:9000/api/transaction/history', {
+        const response = await axios.get('https://zenpay-backend.vercel.app/api/transaction/history', {
           headers: { Authorization: `Bearer ${token}` }
         });
         

@@ -81,7 +81,7 @@ const handleSubmit = async () => {
 
     console.log("🚀 Payload to backend:", payload);
 
-    const response = await axios.post('http://localhost:9000/api/auth/register', payload, {
+    const response = await axios.post('https://zenpay-backend.vercel.app/api/auth/register', payload, {
       headers: {
         'Content-Type': 'application/json'
       }

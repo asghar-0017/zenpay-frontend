@@ -57,7 +57,7 @@ const confirmTransfer = async () => {
   const token = localStorage.getItem('token');
 
   try {
-    const res = await axios.get('http://localhost:9000/api/auth/users', {
+    const res = await axios.get('https://zenpay-backend.vercel.app/api/auth/users', {
       headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -73,7 +73,7 @@ const confirmTransfer = async () => {
     const recipient_account_number = recipient.linked_bank_accounts[0].account_number;
 
     await axios.post(
-      'http://localhost:9000/api/transaction/transfer',
+      'https://zenpay-backend.vercel.app/api/transaction/transfer',
       {
         sender_id: user_id,
         recipient_account_number,
@@ -121,7 +121,7 @@ useEffect(() => {
     if (!user_id) return;
 
     try {
-      const res = await axios.get(`http://localhost:9000/api/ai/history/${user_id}`);
+      const res = await axios.get(`https://zenpay-backend.vercel.app/api/ai/history/${user_id}`);
       const rawHistory = res.data.history || [];
 
       // 🔁 Normalize into user/ai messages
@@ -185,7 +185,7 @@ const sendMessage = async () => {
   setSending(true);
 
   try {
-    const res = await axios.post('http://localhost:9000/api/ai/query', {
+    const res = await axios.post('https://zenpay-backend.vercel.app/api/ai/query', {
       user_id,
       question
     });

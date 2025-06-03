@@ -20,7 +20,7 @@ const QRCard = () => {
     if (!token) return alert('Missing token');
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:9000/api/qr/generate', {
+      const response = await axios.get('https://zenpay-backend.vercel.app/api/qr/generate', {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (response.data?.qr_code_url) {
