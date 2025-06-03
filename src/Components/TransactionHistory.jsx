@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-import { ArrowUpRight, ChevronRight } from 'lucide-react';
+import { ArrowUpRight,ArrowDownLeft ,ChevronRight } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -83,9 +83,17 @@ const handleTransactionClick = (transaction) => {
               onClick={() => handleTransactionClick(tx)}
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-red-500 bg-red-100 dark:bg-red-800/30">
-                  <ArrowUpRight size={20} />
-                </div>
+               <div className={`w-10 h-10 rounded-xl flex items-center justify-center 
+  ${tx.type === 'sent' 
+    ? 'text-red-500 bg-red-100 dark:bg-red-800/30' 
+    : 'text-green-500 bg-green-100 dark:bg-green-800/30'}`}>
+  {tx.type === 'sent' ? (
+    <ArrowUpRight size={20} />
+  ) : (
+    <ArrowDownLeft size={20} />
+  )}
+</div>
+
                 <div>
                   <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                     To {tx.recipient_name}

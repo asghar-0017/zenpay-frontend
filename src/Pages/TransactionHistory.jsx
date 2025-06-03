@@ -60,7 +60,9 @@ const TransactionHistory = () => {
           date: new Date(transaction.created_at).toLocaleDateString(),
           time: new Date(transaction.created_at).toLocaleTimeString(),
           status: transaction.status || 'completed',
-          color: getCategoryColor(transaction.category)
+          color: getCategoryColor(transaction.category),
+          icon: transaction.type === 'send' ? ArrowUpRight : ArrowDownLeft,
+
         }));
 
         setTransactions(formattedTransactions);
@@ -329,7 +331,7 @@ const TransactionHistory = () => {
           ) : (
             <div className="space-y-4">
               {filteredTransactions.map((t) => {
-                const Icon = iconMap[t.category] || iconMap.default;
+                const Icon = t.icon;
                 return (
                   <motion.div
                     key={t.id}
