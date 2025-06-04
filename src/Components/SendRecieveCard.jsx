@@ -119,12 +119,29 @@ const SendModal = ({ show, onClose, setBalance }) => {
   
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser?.balance) {
-      setWalletBalance(storedUser.balance);
+useEffect(() => {
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get("https://zenpay-backend.vercel.app/api/auth/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log(res.data.user.balance)
+      if (res.data?.user?.balance !== undefined) {
+        setWalletBalance(res.data.user.balance);
+      }
+    } catch (error) {
+      console.error("Failed to fetch wallet balance:", error.message);
     }
-  }, [show]);
+  };
+
+  if (show) {
+    fetchUserProfile();
+  }
+}, [show]);
+
 
   useEffect(() => {
     if (!dropdownOpen) return;
