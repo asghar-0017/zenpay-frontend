@@ -95,13 +95,14 @@ const handleTransactionClick = (transaction) => {
 </div>
 
                 <div>
-                  <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-                    To {tx.recipient_name}
-                  </p>
-                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-{formatDate(tx.created_at)}  
-                  </p>
-                </div>
+  <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+    {tx.type === 'bank_transfer' ? 'Deposit from ZenBank' : `To ${tx.recipient_name}`}
+  </p>
+  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+    {formatDate(tx.created_at)}  
+  </p>
+</div>
+
               </div>
               <p className={`text-sm font-medium text-red-500`}>
                 -PKR {tx.amount}

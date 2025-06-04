@@ -51,7 +51,7 @@ const QRCard = () => {
         alert('Invalid QR code data.');
       }
     } catch (err) {
-      alert('Invalid QR format.');
+      
     }
   };
 
@@ -78,7 +78,8 @@ const QRCard = () => {
             className="absolute top-2 right-2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-md"
           >
             <X size={20} />
-          </button>
+                    <Camera size={14} /> Scan QR
+</button>
         </div>
       )}
 

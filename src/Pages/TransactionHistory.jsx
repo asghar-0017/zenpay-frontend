@@ -358,7 +358,11 @@ const TransactionHistory = () => {
                           <Icon size={20} />
                         </div>
                         <div>
-                          <h3 className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{t.name}</h3>
+<h3 className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+  {t.type === 'deposit' && t.name === 'Transaction'
+    ? 'Deposit from ZenBank'
+    : t.name}
+</h3>
                           <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                             {t.date}
                           </p>

@@ -5,7 +5,8 @@ import { useTheme } from '../context/ThemeContext'
 import profileimg from '../assets/profileimg.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import QRScannerModal from './QRScannerModal'
+import QrReader from 'react-qr-reader';
+
 
 // const recipientsList = [
 //   { name: 'Owen F.', img: profileimg },
@@ -134,6 +135,29 @@ const SendModal = ({ show, onClose, setBalance }) => {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [dropdownOpen]);
 
+  const handleScanResult = (data) => {
+  try {
+    const parsed = JSON.parse(data);
+    if (parsed.account_number && parsed.name) {
+      setShowQRScanner(false);
+      setTimeout(() => {
+        navigate('/add-recipient', {
+          state: {
+            account_number: parsed.account_number,
+            name: parsed.name,
+            amount: Number(amount)
+          }
+        });
+      }, 300);
+    } else {
+      alert('Invalid QR code data.');
+    }
+  } catch (err) {
+    alert('Invalid QR format.');
+  }
+};
+
+
   useEffect(() => {
     const fetchRecipients = async () => {
       try {
@@ -250,7 +274,7 @@ const SendModal = ({ show, onClose, setBalance }) => {
 
             <div className="text-center text-3xl font-bold text-[#005339] dark:text-[#A6E22E] my-2">PKR {amount || '0'}</div>
 
-            <div className="flex justify-center mb-2">
+           <div className="flex justify-center mb-2">
   <div className="rounded-xl px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 flex items-center gap-3">
     <Banknote size={18} /> Balance: PKR {walletBalance.toLocaleString()}
     <button
@@ -260,10 +284,34 @@ const SendModal = ({ show, onClose, setBalance }) => {
       <Camera size={14} /> Scan QR
     </button>
   </div>
-
-  {/* QR Scanner Modal */}
-  <QRScannerModal show={showQRScanner} onClose={() => setShowQRScanner(false)} />
 </div>
+   {showQRScanner && (
+    <motion.div
+      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-xl w-full max-w-xs relative">
+        <button
+          onClick={() => setShowQRScanner(false)}
+          className="absolute top-2 right-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-full"
+        >
+          <X size={18} />
+        </button>
+        <p className="text-center mb-3 text-sm text-gray-600 dark:text-gray-300">Scan QR Code</p>
+        <QrReader
+          delay={300}
+          onScan={(data) => data && handleScanResult(data)}
+          onError={(err) => console.error('QR scan error:', err)}
+          style={{ width: '100%' }}
+        />
+      </div>
+    </motion.div>
+  )}
+
+      
+      
 
 
             <Keypad value={amount} setValue={setAmount} max={6} onSendKeyPress={handleSend} />

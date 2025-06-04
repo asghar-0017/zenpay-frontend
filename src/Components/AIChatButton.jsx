@@ -323,7 +323,22 @@ const loadMoreMessages = () => {
                           ? (isDarkMode ? 'bg-[#A6E22E] text-gray-800' : 'bg-[#005339] text-white') 
                           : (isDarkMode ? 'bg-gray-700 text-gray-200' : 'bg-gray-100 text-gray-800')
                       }`}>
-                        {msg.text}
+                       {msg.text.includes('\n') ? (
+  <div className="space-y-1 text-sm leading-relaxed">
+    {msg.text.split('\n').map((line, idx) => (
+      <div key={idx}>
+        {line.startsWith('*') ? (
+          <li className="list-disc ml-5">{line.replace(/^\*+\s*/, '')}</li>
+        ) : (
+          <p>{line}</p>
+        )}
+      </div>
+    ))}
+  </div>
+) : (
+  <span>{msg.text}</span>
+)}
+
                       </div>
                       {msg.from === 'user' && (
                          <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
