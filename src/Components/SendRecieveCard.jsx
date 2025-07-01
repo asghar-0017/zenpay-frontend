@@ -170,7 +170,6 @@ useEffect(() => {
       alert('Invalid QR code data.');
     }
   } catch (err) {
-    alert('Invalid QR format.');
   }
 };
 
