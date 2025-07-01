@@ -297,7 +297,7 @@ useEffect(() => {
       onClick={() => setShowQRScanner(true)}
       className="flex items-center gap-1 text-sm text-[#005339] dark:text-[#A6E22E] border px-2 py-1 rounded-md border-[#A6E22E] hover:bg-[#A6E22E]/10 transition"
     >
-      <Camera size={14} /> Scan QR
+      <Camera size={14} /> 
     </button>
   </div>
 </div>
